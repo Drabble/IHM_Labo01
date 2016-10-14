@@ -22,8 +22,17 @@ private slots:
 
     void on_actionSave_triggered();
 
+    void on_actionQuit_triggered();
+
+    void on_actionAbout_triggered();
+
+    void on_actionHelp_triggered();
+
+    void on_actionSave_as_triggered();
+
 private:
     Ui::Notepad *ui;
+    QString fileName;
 };
 
 #endif // NOTEPAD_H

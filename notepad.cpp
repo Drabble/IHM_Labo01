@@ -24,7 +24,7 @@ void Notepad::on_quitButton_clicked()
 
 void Notepad::on_actionOpen_triggered()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), QString(),
+    fileName = QFileDialog::getOpenFileName(this, tr("Open File"), QString(),
             tr("Text Files (*.txt);;C++ Files (*.cpp *.h)"));
 
     if (!fileName.isEmpty()) {
@@ -41,18 +41,58 @@ void Notepad::on_actionOpen_triggered()
 
 void Notepad::on_actionSave_triggered()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"), QString(),
+    if(fileName.isEmpty()){
+        fileName = QFileDialog::getSaveFileName(this, tr("Save File"), QString(),
+                    tr("Text Files (*.txt);;C++ Files (*.cpp *.h)"));
+    }
+    if (!fileName.isEmpty()) {
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly)) {
+            // error message
+        } else {
+            QTextStream stream(&file);
+            stream << ui->textEdit->toPlainText();
+            stream.flush();
+            file.close();
+        }
+    }
+}
+
+void Notepad::on_actionQuit_triggered()
+{
+    qApp->quit();
+}
+
+void Notepad::on_actionAbout_triggered()
+{
+    QMessageBox::about(this, tr("About Application"),
+             tr("The <b>Application</b> example demonstrates how to "
+                "write modern GUI applications using Qt, with a menu bar, "
+                "toolbars, and a status bar."));
+}
+
+void Notepad::on_actionHelp_triggered()
+{
+    QMessageBox::about(this, tr("Help Application"),
+             tr("The <b>Application</b> example demonstrates how to "
+                "write modern GUI applications using Qt, with a menu bar, "
+                "toolbars, and a status bar."));
+}
+
+void Notepad::on_actionSave_as_triggered()
+{
+    fileName = QFileDialog::getSaveFileName(this, tr("Save File"), QString(),
                 tr("Text Files (*.txt);;C++ Files (*.cpp *.h)"));
 
-        if (!fileName.isEmpty()) {
-            QFile file(fileName);
-            if (!file.open(QIODevice::WriteOnly)) {
-                // error message
-            } else {
-                QTextStream stream(&file);
-                stream << ui->textEdit->toPlainText();
-                stream.flush();
-                file.close();
-            }
+    if (!fileName.isEmpty()) {
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly)) {
+            // error message
+        } else {
+            QTextStream stream(&file);
+            stream << ui->textEdit->toPlainText();
+            stream.flush();
+            file.close();
         }
+    }
 }
