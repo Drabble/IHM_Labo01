@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2016-10-14T10:23:28
+# Project created by QtCreator 2016-10-14T10:40:21
 #
 #-------------------------------------------------
 
@@ -8,13 +8,13 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = IHM_Labo01
+TARGET = Notepad
 TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        notepad.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += notepad.h
 
-FORMS    += mainwindow.ui
+FORMS    += notepad.ui
